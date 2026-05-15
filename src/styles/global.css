@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 174 72% 30%;
+    --primary-foreground: 180 100% 97%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 16% 42%;
+    --accent: 24 95% 53%;
+    --accent-foreground: 30 100% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 174 72% 30%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --background: 222 47% 8%;
+    --foreground: 210 40% 98%;
+    --card: 222 39% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 39% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 174 68% 43%;
+    --primary-foreground: 180 100% 8%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 28% 16%;
+    --muted-foreground: 215 20% 72%;
+    --accent: 24 95% 58%;
+    --accent-foreground: 30 100% 8%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 28% 22%;
+    --input: 217 28% 22%;
+    --ring: 174 68% 43%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    overflow-x: clip;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    overflow-x: clip;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  a {
+    @apply text-inherit;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .motion-card {
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .motion-card:hover {
+    transform: translate3d(0, -4px, 0);
+    border-color: hsl(var(--primary) / 0.32);
+    box-shadow: 0 22px 70px -36px hsl(var(--foreground) / 0.42);
+  }
+
+  .motion-image {
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .group:hover .motion-image {
+    transform: scale3d(1.035, 1.035, 1);
+  }
+
+  .motion-shine {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .motion-shine::after {
+    background: linear-gradient(
+      105deg,
+      transparent 32%,
+      hsl(var(--primary) / 0.13) 48%,
+      transparent 64%
+    );
+    content: "";
+    inset: -45% -75%;
+    pointer-events: none;
+    position: absolute;
+    transform: translate3d(-65%, 0, 0) rotate(12deg);
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .motion-shine:hover::after {
+    transform: translate3d(65%, 0, 0) rotate(12deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @keyframes nav-drop {
+      from {
+        opacity: 0;
+        transform: translate3d(0, -12px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes gentle-float {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      50% {
+        transform: translate3d(0, -10px, 0);
+      }
+    }
+
+    .motion-nav {
+      animation: nav-drop 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .motion-fade-up {
+      animation: fade-up 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .motion-delay-1 {
+      animation-delay: 90ms;
+    }
+
+    .motion-delay-2 {
+      animation-delay: 170ms;
+    }
+
+    .motion-delay-3 {
+      animation-delay: 250ms;
+    }
+
+    .motion-delay-4 {
+      animation-delay: 330ms;
+    }
+
+    .motion-delay-5 {
+      animation-delay: 410ms;
+    }
+
+    .motion-delay-6 {
+      animation-delay: 490ms;
+    }
+
+    .motion-float {
+      animation: gentle-float 8s ease-in-out infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .motion-card:hover,
+    .group:hover .motion-image,
+    .motion-shine::after,
+    .motion-shine:hover::after {
+      transform: none;
+    }
+  }
+}

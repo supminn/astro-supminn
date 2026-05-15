@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+}
+
+const {
+  title = "Supriya Minnasandram | Frontend Developer",
+  description = "Portfolio of Supriya Minnasandram, a web developer, writer, and speaker building React and MERN stack products.",
+} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="description" content={description} />
+<meta property="og:description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+
+<link rel="icon" type="image/png" href="/assets/portfolio/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap"
+  rel="stylesheet"
+/>
+<script is:inline>
+  let storedTheme = null;
+
+  try {
+    storedTheme = localStorage.getItem("theme");
+  } catch {
+    storedTheme = null;
+  }
+
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const shouldUseDark = storedTheme ? storedTheme === "dark" : prefersDark;
+
+  document.documentElement.classList.toggle("dark", shouldUseDark);
+</script>
